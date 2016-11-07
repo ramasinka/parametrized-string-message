@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://E://parametrized-string-message/parametrized-string-message.iml" filepath="E://parametrized-string-message/parametrized-string-message.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parametrized-string-message.iml" filepath="$PROJECT_DIR$/parametrized-string-message.iml" />
     </modules>
   </component>
 </project>
