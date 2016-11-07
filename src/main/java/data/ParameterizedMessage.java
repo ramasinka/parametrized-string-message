@@ -9,24 +9,14 @@ import java.util.Map;
 
 public class ParameterizedMessage {
 
-    Map<String, String> parametersMap = new HashMap<String, String>();
-
-    public ParameterizedMessage(Map<String, String> parametersMap) {
-        this.parametersMap = parametersMap;
-    }
-
     public String replaceParametrizedMessage(String message, Map<String, String> parametersMap) {
-        String resolvedString = null;
-        this.parametersMap = parametersMap;
         StrSubstitutor sub = new StrSubstitutor(parametersMap);
-        if (checkIfMessageHaveAllParameters(parametersMap, message)) {
-            resolvedString = sub.replace(message);
-        }
+        checkIfMessageHaveAllParameters(parametersMap, message);
+        String resolvedString = sub.replace(message);
         return resolvedString;
     }
 
-    public boolean checkIfMessageHaveAllParameters(Map<String, String> parametersMap, String message) {
-        this.parametersMap = parametersMap;
+    private void checkIfMessageHaveAllParameters(Map<String, String> parametersMap, String message) {
         Iterator entries = parametersMap.entrySet().iterator();
         while (entries.hasNext()) {
             Map.Entry entry = (Map.Entry) entries.next();
@@ -37,7 +27,6 @@ public class ParameterizedMessage {
                 throw new IllegalArgumentException("Your message don't have parameter with name:" + key);
             }
         }
-        return true;
     }
 
     private int findParameterInTheMessage(String parameter, String message) {
