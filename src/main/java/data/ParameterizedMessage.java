@@ -10,8 +10,12 @@ import java.util.Map;
 public class ParameterizedMessage {
     private String parameterName;
     private String parameterValue;
-    private String message;
+    private final String message;
     private Map<String, String> parametersMap = new HashMap<String, String>();
+
+    public ParameterizedMessage(String message) {
+        this.message = message;
+    }
 
     public ParameterizedMessage addParameter(String name, String value) {
         this.parameterValue = value;
@@ -37,12 +41,7 @@ public class ParameterizedMessage {
         return message.indexOf(parameter);
     }
 
-    public ParameterizedMessage setMessage(String message) {
-        this.message = message;
-        return this;
-    }
-
-    public String replace() {
+    public String create() {
         StrSubstitutor sub = new StrSubstitutor(parametersMap);
         checkIfMessageHaveAllParameters(parametersMap, message);
         String resolvedString = sub.replace(message);
