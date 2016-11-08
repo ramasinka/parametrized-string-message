@@ -23,7 +23,7 @@ public class ParameterizedMessageTest {
     }
 
     @Test
-    public void shouldNotReplaceParametrizedMessageThenAddTwoSameParameters() {
+    public void shouldReplaceParameterizedMessageWithTwoSameParameters() {
         String message = "Hello ${user}, your username is ${username} and password is ${password}. You can change your username ${username} if you want.";
         String parameterizedMessage = new ParameterizedMessage().addParameter("user", "jonas").addParameter("username", "john").addParameter("password", "abs123")
                 .setMessage(message).replace();
