@@ -25,20 +25,16 @@ public class ParameterizedMessage {
     }
 
     private void checkIfMessageHaveAllParameters(Map<String, String> parametersMap, String message) {
-        Iterator entries = parametersMap.entrySet().iterator();
-        while (entries.hasNext()) {
-            Map.Entry entry = (Map.Entry) entries.next();
-            String key = (String) entry.getKey();
-            if (findParameterInTheMessage(key, message) >= 0) {
-                continue;
-            } else {
-                throw new IllegalArgumentException("Your message don't have parameter with name:" + key);
+        for (Map.Entry<String, String> entry : parametersMap.entrySet()) {
+            String parameterName = entry.getKey();
+            if (findParameterInTheMessage(parameterName, message) < 0) {
+                throw new IllegalArgumentException("Your message don't have parameter with name:" + parameterName);
             }
         }
     }
 
-    private int findParameterInTheMessage(String parameter, String message) {
-        return message.indexOf(parameter);
+    private int findParameterInTheMessage(String parameterName, String message) {
+        return message.indexOf(parameterName);
     }
 
     public String create() {
