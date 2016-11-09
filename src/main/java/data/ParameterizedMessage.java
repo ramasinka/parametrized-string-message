@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParameterizedMessage {
-    private String parameterName;
-    private String parameterValue;
     private final String message;
     private Map<String, String> parametersMap = new HashMap<String, String>();
 
@@ -16,9 +14,7 @@ public class ParameterizedMessage {
         this.message = message;
     }
 
-    public ParameterizedMessage addParameter(String name, String value) {
-        this.parameterValue = value;
-        this.parameterName = name;
+    public ParameterizedMessage addParameter(String parameterName, String parameterValue) {
         parametersMap.put(parameterName, parameterValue);
         return this;
     }
