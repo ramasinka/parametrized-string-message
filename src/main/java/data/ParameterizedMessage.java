@@ -36,11 +36,11 @@ public class ParameterizedMessage {
         };
         sub.setVariableResolver(variableResolver);
         String resolvedString = sub.replace(message);
-        checkIfMessageUseAllParameters(parametersMap, message);
+        checkIfMessageUseAllParameters();
         return resolvedString;
     }
 
-    private void checkIfMessageUseAllParameters(Map<String, String> parametersMap, String message) {
+    private void checkIfMessageUseAllParameters() {
         for (Map.Entry<String, String> entry : parametersMap.entrySet()) {
             String parameterName = entry.getKey();
             String parameterValue = entry.getValue();
