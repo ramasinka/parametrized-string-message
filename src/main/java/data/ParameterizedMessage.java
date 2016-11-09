@@ -45,7 +45,7 @@ public class ParameterizedMessage {
             String parameterName = entry.getKey();
             String parameterValue = entry.getValue();
             if (findParameterInTheMessage(parameterName) < 0) {
-                log.warn("In your message: " + message + " parameter name: " + parameterName + " with value: " + parameterValue + " not used");
+                log.warn("In your message: " + message + " parameter with name: " + parameterName + " and value: " + parameterValue + " not used");
             }
         }
     }
