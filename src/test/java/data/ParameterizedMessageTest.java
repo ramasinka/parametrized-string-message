@@ -24,8 +24,6 @@ public class ParameterizedMessageTest {
         String parameterizedMessage = new ParameterizedMessage(message)
                 .addParameter("user", "jonas")
                 .addParameter("username", "john")
-                .addParameter("password", "abs123")
-                .addParameter("email", "abs123@gmail.com")
                 .create();
     }
 

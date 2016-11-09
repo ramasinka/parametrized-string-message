@@ -1,10 +1,9 @@
 package data;
 
-
+import org.apache.commons.lang3.text.StrLookup;
 import org.apache.commons.lang3.text.StrSubstitutor;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class ParameterizedMessage {
@@ -24,22 +23,19 @@ public class ParameterizedMessage {
         return this;
     }
 
-    private void checkIfMessageHaveAllParameters(Map<String, String> parametersMap, String message) {
-        for (Map.Entry<String, String> entry : parametersMap.entrySet()) {
-            String parameterName = entry.getKey();
-            if (findParameterInTheMessage(parameterName, message) < 0) {
-                throw new IllegalArgumentException("Your message don't have parameter with name:" + parameterName);
-            }
-        }
-    }
-
-    private int findParameterInTheMessage(String parameterName, String message) {
-        return message.indexOf(parameterName);
-    }
-
     public String create() {
         StrSubstitutor sub = new StrSubstitutor(parametersMap);
-        checkIfMessageHaveAllParameters(parametersMap, message);
+        StrLookup<String> variableResolver = new StrLookup<String>() {
+            @Override
+            public String lookup(String key) {
+                String keyValue = parametersMap.get(key);
+                if (keyValue == null) {
+                    throw new IllegalArgumentException("Your message don't have parameter with name:" + parameterName);
+                }
+                return keyValue;
+            }
+        };
+        sub.setVariableResolver(variableResolver);
         String resolvedString = sub.replace(message);
         return resolvedString;
     }
