@@ -30,7 +30,7 @@ public class ParameterizedMessage {
             public String lookup(String key) {
                 String keyValue = parametersMap.get(key);
                 if (keyValue == null) {
-                    throw new IllegalArgumentException("Your message don't have parameter with name:" + parameterName);
+                    throw new IllegalArgumentException("Your message don't have parameter with name:" + keyValue);
                 }
                 return keyValue;
             }
