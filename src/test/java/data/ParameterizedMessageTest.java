@@ -38,4 +38,14 @@ public class ParameterizedMessageTest {
         String replacedParametrizedMessage = "Hello jonas, your username is john and password is abs123. You can change your username john if you want.";
         assertEquals(replacedParametrizedMessage, parameterizedMessage);
     }
+
+    @Test
+    public void shouldGetLoggerMessageThenParameterNotUsedInMessage(){
+        String message = "Hello ${user}, your username is ${username}";
+        String parameterizedMessage = new ParameterizedMessage(message)
+                .addParameter("user", "jonas")
+                .addParameter("username", "john")
+                .addParameter("password", "abs123")
+                .create();
+    }
 }
