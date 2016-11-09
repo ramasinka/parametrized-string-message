@@ -36,20 +36,21 @@ public class ParameterizedMessage {
         };
         sub.setVariableResolver(variableResolver);
         String resolvedString = sub.replace(message);
-        checkIfMessageUseAllParameters(parametersMap, resolvedString);
+        checkIfMessageUseAllParameters(parametersMap, message);
         return resolvedString;
     }
 
     private void checkIfMessageUseAllParameters(Map<String, String> parametersMap, String message) {
         for (Map.Entry<String, String> entry : parametersMap.entrySet()) {
+            String parameterName = entry.getKey();
             String parameterValue = entry.getValue();
-            if (findParameterInTheMessage(parameterValue, message) < 0) {
-                log.warn("In your message: " + message + " parameter value: " + parameterValue + " not used");
+            if (findParameterInTheMessage(parameterName) < 0) {
+                log.warn("In your message: " + message + " parameter name: " + parameterName + " with value: " + parameterValue + " not used");
             }
         }
     }
 
-    private int findParameterInTheMessage(String parameterName, String message) {
+    private int findParameterInTheMessage(String parameterName) {
         return message.indexOf(parameterName);
     }
 }
