@@ -44,7 +44,7 @@ public class ParameterizedMessage {
         for (Map.Entry<String, String> entry : parametersMap.entrySet()) {
             String parameterName = "${" + entry.getKey() + "}";
             if (!message.contains(parameterName)) {
-                log.warn("In your message: {} parameter with name: {} not used", message, parameterName);
+                log.warn("In your message: {} parameter with name: {}, with value: {} not used", message, parameterName, entry.getValue());
             }
         }
     }
