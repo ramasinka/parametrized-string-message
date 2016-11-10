@@ -41,10 +41,10 @@ public class ParameterizedMessage {
     }
 
     private void checkIfMessageUseAllParameters() {
-        for (Map.Entry<String, String> entry : parametersMap.entrySet()) {
-            String parameterName = "${" + entry.getKey() + "}";
+        for (Map.Entry<String, String> parameter : parametersMap.entrySet()) {
+            String parameterName = "${" + parameter.getKey() + "}";
             if (!message.contains(parameterName)) {
-                log.warn("In your message: {} parameter with name: {}, with value: {} not used", message, parameterName, entry.getValue());
+                log.warn("In your message: {} parameter with name: {}, with value: {} not used", message, parameterName, parameter.getValue());
             }
         }
     }
