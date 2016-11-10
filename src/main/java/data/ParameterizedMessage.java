@@ -42,15 +42,15 @@ public class ParameterizedMessage {
 
     private void checkIfMessageUseAllParameters() {
         for (Map.Entry<String, String> entry : parametersMap.entrySet()) {
-            String parameterName = entry.getKey();
+            String parameterName = "${" + entry.getKey() + "}";
             String parameterValue = entry.getValue();
-            if (findParameterInTheMessage(parameterName) < 0) {
+            if (!isParameterUsedInTheMessage(parameterName)) {
                 log.warn("In your message: {} parameter with name: {}, and value: {} not used", message, parameterName, parameterValue);
             }
         }
     }
 
-    private int findParameterInTheMessage(String parameterName) {
-        return message.indexOf(parameterName);
+    private Boolean isParameterUsedInTheMessage(String parameterName) {
+        return message.contains(parameterName);
     }
 }
